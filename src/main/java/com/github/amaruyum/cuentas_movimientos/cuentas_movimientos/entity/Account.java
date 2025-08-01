@@ -25,6 +25,9 @@ public class Account {
     private Double initialBalance;
     
     private Boolean accountStatus;
-
+    
+    //Simula el vinculo con el cliente del otro microservicio
+    @Column(nullable = false)
+    private String clientIdentification;
     
 }

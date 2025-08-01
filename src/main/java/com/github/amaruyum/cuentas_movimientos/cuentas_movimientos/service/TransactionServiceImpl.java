@@ -41,7 +41,7 @@ public class TransactionServiceImpl implements TransactionService {
 
         transaction.setAccount(account);
         transaction.setDate(LocalDate.now());
-        transaction.setAmount(currentBalance);
+        transaction.setBalance(currentBalance);
 
         return transactionRepository.save(transaction);
     }

@@ -38,13 +38,14 @@ public class AccountServiceImpl implements AccountService{
 
     @Override
     public Account updateAccount(String accountNumber, Account account) {
+
         Account existingAccount = accountRepository.findById(accountNumber)
             .orElseThrow(() -> new EntityNotFoundException("Cuenta no encontrada"));
         
         existingAccount.setAccountType(account.getAccountType());
         existingAccount.setInitialBalance(account.getInitialBalance());
         existingAccount.setAccountStatus(account.getAccountStatus());
-
+        existingAccount.setClientIdentification(account.getClientIdentification());
         return accountRepository.save(existingAccount);
     }
 

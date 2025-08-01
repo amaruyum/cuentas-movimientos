@@ -36,23 +36,23 @@ public class TransactionServiceTest {
 
     @Test 
     void testRegisterTransaction_SuccessfulDeposit() {
-        Account account = new Account("123456", "Ahorro", 1000.0, true);
-        Transaction transaction = new Transaction(null, null, "Deposito", 500.0, null,null);
+        Account account = new Account("123456", "Ahorro", 5000.0, true, "1234567890");
+        Transaction transaction = new Transaction(null, null, "Deposito", 1450.0, null,null);
 
         when(accountRepository.findById("123456")).thenReturn(java.util.Optional.of(account));
         when(transactionRepository.save(any(Transaction.class))).thenAnswer(i -> i.getArguments()[0]);
 
         Transaction resultTransaction = transactionService.registerTransaction("123456", transaction);
         
-        assertEquals(1500.0, resultTransaction.getAmount());
+        assertEquals(6450.0, resultTransaction.getAmount());
         verify(accountRepository).save(account);
         verify(transactionRepository).save(any(Transaction.class));
     }
 
     @Test
     void testRegisterTransaccion_insufficientBalanceWithdrawal() {
-        Account account = new Account("123456", "Ahorro", 100.0, true );
-        Transaction transaction = new Transaction(null, null, "Retiro", 500.0, null, null);
+        Account account = new Account("123456", "Ahorro", 10.0, true, "1234567890" );
+        Transaction transaction = new Transaction(null, null, "Retiro", 233.0, null, null);
 
         when(accountRepository.findById("123456")).thenReturn(java.util.Optional.of(account));
 
